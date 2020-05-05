@@ -32,3 +32,5 @@ import json
 with open('records.json','w') as f:
     json.dump(records,f)
 table=get_league_table()
+generate_league_pdf()
+

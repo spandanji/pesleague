@@ -63,6 +63,16 @@ def get_league_table():
     print(df)
     return df
 
+def generate_league_pdf():
+    df=get_league_table()
+    from jinja2 import Environment, FileSystemLoader
+    env = Environment(loader=FileSystemLoader('.'))
+    template = env.get_template("league-table.html")
+    template_vars = {"title" : "Pes league-table",
+                 "national_pivot_table": df.to_html()}
+    html_out = template.render(template_vars)
+    from weasyprint import HTML
+    HTML(string=html_out).write_pdf("league-table.pdf",stylesheets=["style.css"])
+    print(html_out)
 if __name__=="__main__":
-    getavatars()
-
+    generate_league_pdf()
