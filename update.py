@@ -1,7 +1,7 @@
 from utils import *
 import pprint
 sched = get_schedule()
-pprint.pprint(sched)
+#pprint.pprint(sched)
 day = input("Enter day : ")
 idx = input("Enter Match id :")
 match = sched[day][idx]
@@ -31,6 +31,10 @@ records[match['p2']]['gs']+=score[1]
 import json
 with open('records.json','w') as f:
     json.dump(records,f)
-table=get_league_table()
+
 generate_league_pdf()
 
+sched[day][idx] = {'p1': match['p1'] + f' :    {score[0]}', 'p2' :f'{score[1]}    : '+ match['p2'] }
+with open('schedule.json', 'w') as f:
+    json.dump(sched, f)
+render_matchups()

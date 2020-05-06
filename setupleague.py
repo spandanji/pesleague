@@ -42,4 +42,5 @@ for i in range(n):
 print("Generating Daily Schedule")
 daily_schedule=generate_schedule(all_matches, m)
 
-table = get_league_table()
+generate_league_pdf()
+render_matchups()
