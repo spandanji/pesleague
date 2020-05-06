@@ -60,8 +60,9 @@ def get_league_table():
     df = pd.read_json('records.json').transpose()
     df['Points']=df['wins']*3 + df['draws']
     df['Goal_diff']=df['gs'] - df['gc']
+    df['Played']=df['wins']+df['draws']+df['losses']
     df.sort_values(by=['Points','Goal_diff'], ascending=False, inplace=True)
-    df = df[['Points','wins','draws','losses','gs','gc','Goal_diff']]
+    df = df[['Points','Played','wins','draws','losses','gs','gc','Goal_diff']]
     print(df)
     return df
 
