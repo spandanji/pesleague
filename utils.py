@@ -65,6 +65,28 @@ def get_league_table():
     print(df)
     return df
 
+def genimgblock(name, rank):
+    rec = get_records()
+    if rank <3:
+        pclass='name'
+        imclass='name'
+    else:
+        pclass='namenorank'
+        imclass = 'rest'
+    block = '<div class ="block">\n'
+    block += f'<img class={imclass} src={rec[name]["avatar"]}>\n'
+    block += f'<p class={pclass}>{rank+1}. {name}</p>'
+    block += '</div>\n\n'
+    return block
+
+def add_avatar_to_html(df,html):
+    html=html+"\n\n<br><br><br>\n\n"
+    indices = list(df.index)
+    for rank,name in enumerate(indices):
+        html+=genimgblock(name=name, rank=rank)
+        if rank==2:
+            html+="<br><br>\n\n"
+    return html
 def generate_league_pdf():
     print("Rendering the league table in league-table.pdf")
     df=get_league_table()
@@ -73,9 +95,16 @@ def generate_league_pdf():
     template = env.get_template("league-table.html")
     template_vars = {"title" : "Pes league-table",
                  "national_pivot_table": df.to_html()}
+
     html_out = template.render(template_vars)
+    html = '\n'.join(html_out.split('\n')[:-2])
+    html = add_avatar_to_html(df,html)+"\n</body>\n</html>"
+    with open('table-html.html' ,'w') as f:
+        f.write(html)
+    #print(html)
     from weasyprint import HTML
-    HTML(string=html_out).write_pdf("league-table.pdf",stylesheets=["style.css"])
+    import os
+    html=HTML(string=html,base_url=os.getcwd()).write_pdf("league-table.pdf",stylesheets=["style.css"], presentational_hints=True)
     #print(html_out)
 
 def render_matchups():
@@ -106,4 +135,4 @@ def render_matchups():
 
 if __name__=="__main__":
     generate_league_pdf()
-    render_matchups() 
+    #render_matchups() 

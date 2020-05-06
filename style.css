@@ -18,3 +18,31 @@ td, th {
 tr:nth-child(even) {
   background-color: #ccccff;
 }
+img {
+    border: 1px solid #ddd;
+    border-radius: 40px;
+    height: 220px;
+    width: 200px;
+}
+.rest {
+    height: 160px;
+    width: 120px;
+}
+.block {
+    display:inline-block;
+}
+.name {
+
+    text-align: center;
+    font-size: 20px;
+    font-weight: bolder;
+    color: darkmagenta;
+
+}
+.namenorank {
+
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder;
+    color: darkmagenta;
+}
