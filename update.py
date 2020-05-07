@@ -3,6 +3,9 @@ import pprint
 sched = get_schedule()
 #pprint.pprint(sched)
 day = input("Enter day : ")
+for i in sched[day]:
+    print(f"ID:{i} {sched[day][i]['p1']} vs {sched[day][i]['p2']}")
+
 idx = input("Enter Match id :")
 match = sched[day][idx]
 print(f"{match['p1']} vs {match['p2']}")
