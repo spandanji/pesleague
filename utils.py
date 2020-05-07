@@ -136,4 +136,4 @@ def render_matchups():
 
 if __name__=="__main__":
     generate_league_pdf()
-    #render_matchups() 
+    render_matchups() 
